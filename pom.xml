@@ -19,6 +19,13 @@
     <properties/>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -38,9 +45,9 @@
     </build>
 
     <scm>
-        <connection>scm:git:https://github.com/PBZ-InsightR/GildedRoseJavaKata.git</connection>
-        <developerConnection>scm:git:https://github.com/PBZ-InsightR/GildedRoseJavaKata.git</developerConnection>
-        <url>https://github.com/PBZ-InsightR/GildedRoseJavaKata</url>
+        <connection>scm:git:https://github.com/QuentinLetort/ProjetDesignPattern.git</connection>
+        <developerConnection>scm:git:https://github.com/QuentinLetort/ProjetDesignPattern.git</developerConnection>
+        <url>https://github.com/QuentinLetort/ProjetDesignPattern.git</url>
     </scm>
 
     <repositories/>
