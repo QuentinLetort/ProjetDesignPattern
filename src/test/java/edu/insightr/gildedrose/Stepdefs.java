@@ -26,8 +26,8 @@ public class Stepdefs {
         assertThat(conjured.getQuality(), is(conjuredQuality));
     }
 
-    @When("^I update the inventory$")
+    @When("^I update the inventory with visitor$")
     public void iUpdateTheInventory() throws Throwable {
-        inventory.updateQuality();
+        conjured.accept(new UpdateVisitor());
     }
 }

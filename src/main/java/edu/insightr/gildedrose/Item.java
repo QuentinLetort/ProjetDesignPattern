@@ -2,7 +2,7 @@ package edu.insightr.gildedrose;
 
 import java.util.Objects;
 
-public class Item {
+public class Item implements IVisitable{
 
     private String name;
     private int sellIn;
@@ -62,5 +62,10 @@ public class Item {
                 ", sellIn=" + sellIn +
                 ", quality=" + quality +
                 '}';
+    }
+
+    @Override
+    public void accept(IVisitor visitor) {
+        visitor.visit(this);
     }
 }
