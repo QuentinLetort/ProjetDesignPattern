@@ -6,8 +6,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -19,18 +20,18 @@ public class InventoryController implements Initializable {
     @FXML
     private TableView<Item> itemTable;
     @FXML
-    private TableColumn<Item,String> itemName;
+    private TableColumn<Item, String> itemName;
     @FXML
-    private TableColumn<Item,String> itemSellIn;
+    private TableColumn<Item, String> itemSellIn;
     @FXML
-    private TableColumn<Item,String>  itemQuality;
-    private Inventory inventory=null;
+    private TableColumn<Item, String> itemQuality;
+    private Inventory inventory = null;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-            inventory=new Inventory();
-            itemData.setAll(inventory.getItems());
-            itemTable.getItems().setAll(itemData);
+        inventory = new Inventory();
+        itemData.setAll(inventory.getItems());
+        itemTable.getItems().setAll(itemData);
     }
 
     public void onUpdate(ActionEvent actionEvent) {

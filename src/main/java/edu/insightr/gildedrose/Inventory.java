@@ -5,7 +5,6 @@ import java.util.Arrays;
 public class Inventory {
 
     // TODO (PBZ) : you have a lot of warnings that could be resolved
-    // TODO (PBZ) : your code is not indented
 
     public static final String DEXTERITY_VEST = "+5 Dexterity Vest";
     public static final String AGED_BRIE = "Aged Brie";
@@ -16,7 +15,7 @@ public class Inventory {
 
     private Item[] items;
 
-    public Inventory (Item[] items) {
+    public Inventory(Item[] items) {
         super();
         this.items = items;
     }
@@ -34,6 +33,14 @@ public class Inventory {
 
     }
 
+    public static void main(String[] args) {
+        Inventory inventory = new Inventory();
+        for (int i = 0; i < 15; i++) {
+            inventory.updateQuality();
+            inventory.printInventory();
+        }
+    }
+
     public Item[] getItems() {
         return items;
     }
@@ -47,48 +54,47 @@ public class Inventory {
         System.out.println("\n");
     }
 
-    public void updateItems(int i){
+    public void updateItems(int i) {
 
-        if( items[i].getQuality() > 0){
+        if (items[i].getQuality() > 0) {
             items[i].setQuality(items[i].getQuality() - 1);
         }
-        if ( items[i].getQuality() > 0
-                && items[i].getSellIn() <= 0){
-            items[i].setQuality(items[i].getQuality() -1);
+        if (items[i].getQuality() > 0
+                && items[i].getSellIn() <= 0) {
+            items[i].setQuality(items[i].getQuality() - 1);
         }
-        items[i].setSellIn(items[i].getSellIn() -1);
+        items[i].setSellIn(items[i].getSellIn() - 1);
 
     }
 
-    public void updateAgedBrie(int i){
-        if( items[i].getQuality() < 50){
-            items[i].setQuality(items[i].getQuality() +1);
+    public void updateAgedBrie(int i) {
+        if (items[i].getQuality() < 50) {
+            items[i].setQuality(items[i].getQuality() + 1);
         }
-        items[i].setSellIn((items[i].getSellIn() -1));
+        items[i].setSellIn((items[i].getSellIn() - 1));
 
     }
 
-    public void updateConjured(int i){
-        if( items[i].getQuality() > 0) {
+    public void updateConjured(int i) {
+        if (items[i].getQuality() > 0) {
             items[i].setQuality(items[i].getQuality() - 2);
         }
 
-        if ( items[i].getQuality() >0
-                && items[i].getSellIn() <= 0){
-            items[i].setQuality(items[i].getQuality() -2);
+        if (items[i].getQuality() > 0
+                && items[i].getSellIn() <= 0) {
+            items[i].setQuality(items[i].getQuality() - 2);
         }
-        items[i].setSellIn(items[i].getSellIn() -1);
-        if(items[i].getQuality()<0){
+        items[i].setSellIn(items[i].getSellIn() - 1);
+        if (items[i].getQuality() < 0) {
             items[i].setQuality(0);
         }
     }
 
-    public void updateBackstage(int i){
+    public void updateBackstage(int i) {
 
-        if (items[i].getSellIn() <= 0){
+        if (items[i].getSellIn() <= 0) {
             items[i].setQuality(items[i].getQuality() - items[i].getQuality());
-        }
-        else {
+        } else {
             if (items[i].getQuality() < 50) {
                 items[i].setQuality(items[i].getQuality() + 1);
             }
@@ -100,31 +106,31 @@ public class Inventory {
             }
         }
 
-        items[i].setSellIn((items[i].getSellIn() -1));
+        items[i].setSellIn((items[i].getSellIn() - 1));
 
     }
 
-    public void updateQuality(){
+    public void updateQuality() {
 
-        for (int i = 0; i < items.length ; i ++){
+        for (int i = 0; i < items.length; i++) {
 
-            if(items[i].getName() != AGED_BRIE
+            if (items[i].getName() != AGED_BRIE
                     && items[i].getName() != SULFURAS_HAND_OF_RAGNAROS
                     && items[i].getName() != BACKSTAGE_PASSES_TO_CONCERT
-                    && items[i].getName() != CONJURED_MANA_CAKE){
+                    && items[i].getName() != CONJURED_MANA_CAKE) {
 
                 updateItems(i);
             }
 
-            if(items[i].getName() == AGED_BRIE){
+            if (items[i].getName() == AGED_BRIE) {
                 updateAgedBrie(i);
             }
 
-            if(items[i].getName() == CONJURED_MANA_CAKE){
+            if (items[i].getName() == CONJURED_MANA_CAKE) {
                 updateConjured(i);
             }
 
-            if(items[i].getName() == BACKSTAGE_PASSES_TO_CONCERT){
+            if (items[i].getName() == BACKSTAGE_PASSES_TO_CONCERT) {
                 updateBackstage(i);
             }
 
@@ -143,14 +149,6 @@ public class Inventory {
     @Override
     public int hashCode() {
         return Arrays.hashCode(items);
-    }
-
-    public static void main(String[] args){
-        Inventory inventory = new Inventory();
-        for(int i = 0; i < 15 ; i ++){
-            inventory.updateQuality();
-           inventory.printInventory();
-        }
     }
 
 }
