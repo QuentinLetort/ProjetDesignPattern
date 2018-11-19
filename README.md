@@ -1,7 +1,11 @@
 Letort Quentin
+
 Laudou Guillaume
+
 Mavier Nhu Vuong
+
 Marchand Cyril
+
 Medeiros Sandra
 
 # GildedRoseJavaKata
