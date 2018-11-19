@@ -4,9 +4,6 @@ import java.util.Arrays;
 
 public class Inventory {
 
-    // TODO (PBZ) : you have a lot of warnings that could be resolved
-    // TODO (PBZ) : your code is not indented
-
     public static final String DEXTERITY_VEST = "+5 Dexterity Vest";
     public static final String AGED_BRIE = "Aged Brie";
     public static final String ELIXIR_OF_THE_MONGOOSE = "Elixir of the Mongoose";
