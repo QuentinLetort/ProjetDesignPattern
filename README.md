@@ -1,12 +1,10 @@
-Letort Quentin
+# Team 
 
-Laudou Guillaume
-
-Mavier Nhu Vuong
-
-Marchand Cyril
-
-Medeiros Sandra
+- Letort Quentin
+- Laudou Guillaume
+- Mavier Nhu Vuong
+- Marchand Cyril
+- Medeiros Sandra
 
 # GildedRoseJavaKata
 The Gilded Rose Kata in Java

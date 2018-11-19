@@ -3,10 +3,8 @@ package edu.insightr.gildedrose;
 import java.util.Objects;
 
 public class Item {
-
     private String name;
     private int sellIn;
-
     private int quality;
 
     public Item(String name, int sellIn, int quality) {

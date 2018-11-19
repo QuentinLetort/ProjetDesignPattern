@@ -4,11 +4,14 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class InventoryTest {
-
+    // TODO (PBZ) : the code is not correctly indented
+    // TODO (PBZ) : be carreful using operations within tests (initialQuality+3+5*2+5*3). It's safer to have fixed value !
+    // TODO (PBZ) : unit testing is about testing a method not a behaviour. It's not tes case of the tests below. Instead of JUnit use Cucumber to perform behaviour tests.
     //Test sur updateQuality pour vérifier que la qualité ne descend jamais en dessous de 0
     // ou ne monte au dessus de 50 (excepté pour le "Sulfuras")
     @Test
     public void updateQualityLimit(){
+        // TODO(PBZ) : don't let wanings into your code ...
         boolean verify=true;
         Inventory inventory=new Inventory();
         for(int i=0;i<60;i++){
@@ -17,6 +20,7 @@ public class InventoryTest {
         for(int i=0;i<inventory.getItems().length;i++){
             if(inventory.getItems()[i].getName()!=Inventory.SULFURAS_HAND_OF_RAGNAROS){
                 if(inventory.getItems()[i].getQuality()>50 || inventory.getItems()[i].getQuality()<0 ){
+                    // TODO (PBZ) : why having 2 ifs ?
                     verify=false;
                 }
             }

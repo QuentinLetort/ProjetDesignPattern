@@ -9,6 +9,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class Stepdefs {
+    // TODO (PBZ) : you have some unused import.
     private Inventory inventory;
     private Item[] items;
     private Item vest;
