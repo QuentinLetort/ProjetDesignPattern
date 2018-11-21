@@ -4,8 +4,6 @@ import java.util.Arrays;
 
 public class Inventory {
 
-    // TODO (PBZ) : you have a lot of warnings that could be resolved
-
     public static final String DEXTERITY_VEST = "+5 Dexterity Vest";
     public static final String AGED_BRIE = "Aged Brie";
     public static final String ELIXIR_OF_THE_MONGOOSE = "Elixir of the Mongoose";
@@ -33,19 +31,11 @@ public class Inventory {
 
     }
 
-    public static void main(String[] args) {
-        Inventory inventory = new Inventory();
-        for (int i = 0; i < 15; i++) {
-            inventory.updateQuality();
-            inventory.printInventory();
-        }
-    }
-
     public Item[] getItems() {
         return items;
     }
 
-    public void printInventory() {
+    private void printInventory() {
         System.out.println("***************");
         for (Item item : items) {
             System.out.println(item);
@@ -54,7 +44,7 @@ public class Inventory {
         System.out.println("\n");
     }
 
-    public void updateItems(int i) {
+    private void updateItems(int i) {
 
         if (items[i].getQuality() > 0) {
             items[i].setQuality(items[i].getQuality() - 1);
@@ -67,7 +57,7 @@ public class Inventory {
 
     }
 
-    public void updateAgedBrie(int i) {
+    private void updateAgedBrie(int i) {
         if (items[i].getQuality() < 50) {
             items[i].setQuality(items[i].getQuality() + 1);
         }
@@ -75,7 +65,7 @@ public class Inventory {
 
     }
 
-    public void updateConjured(int i) {
+    private void updateConjured(int i) {
         if (items[i].getQuality() > 0) {
             items[i].setQuality(items[i].getQuality() - 2);
         }
@@ -90,10 +80,10 @@ public class Inventory {
         }
     }
 
-    public void updateBackstage(int i) {
+    private void updateBackstage(int i) {
 
         if (items[i].getSellIn() <= 0) {
-            items[i].setQuality(items[i].getQuality() - items[i].getQuality());
+            items[i].setQuality(0);
         } else {
             if (items[i].getQuality() < 50) {
                 items[i].setQuality(items[i].getQuality() + 1);
@@ -114,23 +104,23 @@ public class Inventory {
 
         for (int i = 0; i < items.length; i++) {
 
-            if (items[i].getName() != AGED_BRIE
-                    && items[i].getName() != SULFURAS_HAND_OF_RAGNAROS
-                    && items[i].getName() != BACKSTAGE_PASSES_TO_CONCERT
-                    && items[i].getName() != CONJURED_MANA_CAKE) {
+            if (!AGED_BRIE.equals(items[i].getName())
+                    && !SULFURAS_HAND_OF_RAGNAROS.equals(items[i].getName())
+                    && !BACKSTAGE_PASSES_TO_CONCERT.equals(items[i].getName())
+                    && !CONJURED_MANA_CAKE.equals(items[i].getName())) {
 
                 updateItems(i);
             }
 
-            if (items[i].getName() == AGED_BRIE) {
+            if (AGED_BRIE.equals(items[i].getName())) {
                 updateAgedBrie(i);
             }
 
-            if (items[i].getName() == CONJURED_MANA_CAKE) {
+            if (CONJURED_MANA_CAKE.equals(items[i].getName())) {
                 updateConjured(i);
             }
 
-            if (items[i].getName() == BACKSTAGE_PASSES_TO_CONCERT) {
+            if (BACKSTAGE_PASSES_TO_CONCERT.equals(items[i].getName())) {
                 updateBackstage(i);
             }
 
@@ -149,6 +139,14 @@ public class Inventory {
     @Override
     public int hashCode() {
         return Arrays.hashCode(items);
+    }
+
+    public static void main(String[] args) {
+        Inventory inventory = new Inventory();
+        for (int i = 0; i < 15; i++) {
+            inventory.updateQuality();
+            inventory.printInventory();
+        }
     }
 
 }
