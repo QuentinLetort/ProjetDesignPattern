@@ -161,12 +161,35 @@ public class Inventory {
 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Inventory inventory = (Inventory) o;
+        return Arrays.equals(items, inventory.items);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(items);
+    }
+
+    public static void main(String[] args) {
+        Inventory inventory = new Inventory();
+        for (int i = 0; i < 15; i++) {
+            inventory.updateQuality();
+            inventory.printInventory();
+        }
+
+
+    }
+
     public Map<String, Integer> quantityPerItem() {
         Map<String, Integer> quantity = new HashMap<>();
         int[] compteurs = new int[6];
 
-        for (int i = 0; i < items.length; i++) {
-            switch (items[i].getName()) {
+        for (Item item : items) {
+            switch (item.getName()) {
                 case DEXTERITY_VEST:
                     compteurs[0]++;
                     break;
@@ -195,34 +218,6 @@ public class Inventory {
         quantity.put(CONJURED_MANA_CAKE, compteurs[5]);
 
         return quantity;
-
-    }
-
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Inventory inventory = (Inventory) o;
-        return Arrays.equals(items, inventory.items);
-    }
-
-    @Override
-    public int hashCode() {
-        return Arrays.hashCode(items);
-    }
-
-    public static void main(String[] args) {
-        Inventory inventory = new Inventory();
-        for (int i = 0; i < 15; i++) {
-            inventory.updateQuality();
-            inventory.printInventory();
-        }
-        Map<String, Integer> objet;
-        objet = inventory.quantityPerItem();
-        int objectQuantity = objet.get(CONJURED_MANA_CAKE);
-        System.out.println(objectQuantity);
 
     }
 
