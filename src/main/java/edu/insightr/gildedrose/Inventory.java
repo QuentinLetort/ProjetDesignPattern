@@ -1,11 +1,11 @@
 package edu.insightr.gildedrose;
 
-import java.io.FileReader;
-import java.util.Arrays;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+
+import java.io.FileReader;
+import java.util.Arrays;
 
 public class Inventory {
 
@@ -18,14 +18,25 @@ public class Inventory {
 
     private Item[] items;
 
-    private Item[] ListItemFromJSON() {
+    public Inventory() {
+        super();
+        items = ListItemsFromJSON(getClass().getResource("/json/initialInventory.json").getFile());
+
+    }
+
+
+    public Inventory(Item[] items) {
+        super();
+        this.items = items;
+    }
+
+    public Item[] ListItemsFromJSON(String path) {
         Item[] inv = null;
         JSONParser parser = new JSONParser();
 
         try {
-            String respath = "/json/initialInventory.json";
-            String file = getClass().getResource(respath).getFile();
-            Object obj = parser.parse(new FileReader(file));
+
+            Object obj = parser.parse(new FileReader(path));
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray inventory = (JSONArray) jsonObject.get("inventory");
             inv = new Item[inventory.size()];
@@ -41,18 +52,6 @@ public class Inventory {
             e.printStackTrace();
         }
         return inv;
-    }
-
-
-    public Inventory(Item[] items) {
-        super();
-        this.items = items;
-    }
-
-    public Inventory() {
-        super();
-        items = ListItemFromJSON();
-
     }
 
     public Item[] getItems() {
