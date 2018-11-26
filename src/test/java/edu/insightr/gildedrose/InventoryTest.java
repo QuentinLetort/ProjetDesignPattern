@@ -5,26 +5,6 @@ import org.junit.Test;
 
 public class InventoryTest {
     // TODO (PBZ) : unit testing is about testing a method not a behaviour. It's not tes case of the tests below. Instead of JUnit use Cucumber to perform behaviour tests.
-    //Test sur updateQuality pour vérifier que la qualité ne descend jamais en dessous de 0
-    // ou ne monte au dessus de 50 (excepté pour le "Sulfuras")
-    @Test
-    public void updateQualityLimit() {
-        // TODO(PBZ) : don't let wanings into your code ...
-        boolean verify = true;
-        Inventory inventory = new Inventory();
-        for (int i = 0; i < 60; i++) {
-            inventory.updateQuality();
-        }
-        for (int i = 0; i < inventory.getItems().length; i++) {
-            if (inventory.getItems()[i].getName() != Inventory.SULFURAS_HAND_OF_RAGNAROS) {
-                if (inventory.getItems()[i].getQuality() > 50 || inventory.getItems()[i].getQuality() < 0) {
-                    // TODO (PBZ) : why having 2 ifs ?
-                    verify = false;
-                }
-            }
-        }
-        Assert.assertTrue(verify);
-    }
 
     //Test sur updateQuality pour vérifier que la qualité du "Sulfuras" n'a pas été modifié
     @Test
@@ -55,7 +35,6 @@ public class InventoryTest {
     @Test
     public void updateQualityBasicObject() {
         Inventory inventory = new Inventory(new Item[]{new Item(Inventory.DEXTERITY_VEST, 10, 20)});
-        int initialQuality = inventory.getItems()[0].getQuality();
         for (int i = 0; i < 10; i++) {
             inventory.updateQuality();
         }
@@ -74,7 +53,6 @@ public class InventoryTest {
     @Test
     public void updateQualityConjured() {
         Inventory inventory = new Inventory(new Item[]{new Item(Inventory.CONJURED_MANA_CAKE, 3, 18)});
-        int initialQuality = inventory.getItems()[0].getQuality();
         for (int i = 0; i < 3; i++) {
             inventory.updateQuality();
         }
@@ -92,7 +70,6 @@ public class InventoryTest {
     @Test
     public void updateQualityBackstagePasses() {
         Inventory inventory = new Inventory(new Item[]{new Item(Inventory.BACKSTAGE_PASSES_TO_CONCERT, 13, 5)});
-        int initialQuality = inventory.getItems()[0].getQuality();
         for (int i = 0; i < 3; i++) {
             inventory.updateQuality();
         }

@@ -1,6 +1,11 @@
 package edu.insightr.gildedrose;
 
+import java.io.FileReader;
 import java.util.Arrays;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 public class Inventory {
 
@@ -13,6 +18,32 @@ public class Inventory {
 
     private Item[] items;
 
+    private Item[] ListItemFromJSON() {
+        Item[] inv = null;
+        JSONParser parser = new JSONParser();
+
+        try {
+            String respath = "/json/initialInventory.json";
+            String file = getClass().getResource(respath).getFile();
+            Object obj = parser.parse(new FileReader(file));
+            JSONObject jsonObject = (JSONObject) obj;
+            JSONArray inventory = (JSONArray) jsonObject.get("inventory");
+            inv = new Item[inventory.size()];
+            for (int i = 0; i < inventory.size(); i++) {
+                JSONObject item = (JSONObject) inventory.get(i);
+                String name = (String) item.get("name");
+                long sellIn = (long) item.get("sellIn");
+                long quality = (long) item.get("quality");
+                inv[i] = new Item(name, (int) sellIn, (int) quality);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return inv;
+    }
+
+
     public Inventory(Item[] items) {
         super();
         this.items = items;
@@ -20,14 +51,7 @@ public class Inventory {
 
     public Inventory() {
         super();
-        items = new Item[]{
-                new Item(DEXTERITY_VEST, 10, 20),
-                new Item(AGED_BRIE, 2, 0),
-                new Item(ELIXIR_OF_THE_MONGOOSE, 5, 7),
-                new Item(SULFURAS_HAND_OF_RAGNAROS, 0, 80),
-                new Item(BACKSTAGE_PASSES_TO_CONCERT, 15, 20),
-                new Item(CONJURED_MANA_CAKE, 3, 6)
-        };
+        items = ListItemFromJSON();
 
     }
 
@@ -128,6 +152,14 @@ public class Inventory {
         }
     }
 
+    public void addItems(Item[] items) {
+        Item[] newItems = new Item[this.items.length + items.length];
+        System.arraycopy(this.items, 0, newItems, 0, this.items.length);
+        System.arraycopy(items, 0, newItems, this.items.length, items.length);
+        this.items = newItems;
+
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -147,6 +179,8 @@ public class Inventory {
             inventory.updateQuality();
             inventory.printInventory();
         }
+
+
     }
 
 }

@@ -1,8 +1,8 @@
-Feature: vest Item
+Feature: elixir Item
   # a vest item quality decreases by one
 
-  Scenario: vest item update
+  Scenario: elixir item update
     Given I have a new inventory
-    Then the quality of the vest item is 7
+    Then the quality of the elixir item is 7
     When I update the inventory
-    Then the quality of the vest item is 6
+    Then the quality of the elixir item is 6
