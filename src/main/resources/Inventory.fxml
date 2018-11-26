@@ -6,29 +6,27 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="edu.insightr.gildedrose.InventoryController">
+<AnchorPane fx:id="anchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.insightr.gildedrose.InventoryController">
 
     <TableView fx:id="itemTable" layoutX="14.0" layoutY="14.0" prefHeight="600.0" prefWidth="500.0">
         <columns>
             <TableColumn prefWidth="300.0" text="Name">
                 <cellValueFactory>
-                    <PropertyValueFactory property="name"/>
+                    <PropertyValueFactory property="name" />
                 </cellValueFactory>
             </TableColumn>
             <TableColumn prefWidth="100.0" text="SellIn">
                 <cellValueFactory>
-                    <PropertyValueFactory property="sellIn"/>
+                    <PropertyValueFactory property="sellIn" />
                 </cellValueFactory>
             </TableColumn>
             <TableColumn prefWidth="100.0" text="Quality">
                 <cellValueFactory>
-                    <PropertyValueFactory property="quality"/>
+                    <PropertyValueFactory property="quality" />
                 </cellValueFactory>
             </TableColumn>
         </columns>
     </TableView>
-    <Button layoutX="195.0" layoutY="624.0" onAction="#onUpdate" text="Update"/>
-    <Button layoutX="101.0" layoutY="624.0" mnemonicParsing="false" onAction="#onLoad" text="Load File"/>
-
+    <Button layoutX="195.0" layoutY="624.0" onAction="#onUpdate" text="Update" />
+    <Button layoutX="101.0" layoutY="624.0" mnemonicParsing="false" onAction="#onLoad" text="Load File" />
 </AnchorPane>

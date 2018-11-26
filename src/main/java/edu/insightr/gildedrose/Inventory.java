@@ -6,6 +6,8 @@ import org.json.simple.parser.JSONParser;
 
 import java.io.FileReader;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Inventory {
 
@@ -159,6 +161,45 @@ public class Inventory {
 
     }
 
+    public Map<String, Integer> quantityPerItem() {
+        Map<String, Integer> quantity = new HashMap<>();
+        int[] compteurs = new int[6];
+
+        for (int i = 0; i < items.length; i++) {
+            switch (items[i].getName()) {
+                case DEXTERITY_VEST:
+                    compteurs[0]++;
+                    break;
+                case AGED_BRIE:
+                    compteurs[1]++;
+                    break;
+                case ELIXIR_OF_THE_MONGOOSE:
+                    compteurs[2]++;
+                    break;
+                case SULFURAS_HAND_OF_RAGNAROS:
+                    compteurs[3]++;
+                    break;
+                case BACKSTAGE_PASSES_TO_CONCERT:
+                    compteurs[4]++;
+                    break;
+                case CONJURED_MANA_CAKE:
+                    compteurs[5]++;
+                    break;
+            }
+        }
+        quantity.put(DEXTERITY_VEST, compteurs[0]);
+        quantity.put(AGED_BRIE, compteurs[1]);
+        quantity.put(ELIXIR_OF_THE_MONGOOSE, compteurs[2]);
+        quantity.put(SULFURAS_HAND_OF_RAGNAROS, compteurs[3]);
+        quantity.put(BACKSTAGE_PASSES_TO_CONCERT, compteurs[4]);
+        quantity.put(CONJURED_MANA_CAKE, compteurs[5]);
+
+        return quantity;
+
+    }
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -178,7 +219,10 @@ public class Inventory {
             inventory.updateQuality();
             inventory.printInventory();
         }
-
+        Map<String, Integer> objet;
+        objet = inventory.quantityPerItem();
+        int objectQuantity = objet.get(CONJURED_MANA_CAKE);
+        System.out.println(objectQuantity);
 
     }
 
