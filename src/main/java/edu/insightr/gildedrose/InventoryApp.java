@@ -15,7 +15,7 @@ public class InventoryApp extends Application {
     public void start(Stage primaryStage) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/Inventory.fxml"));
-            Scene scene = new Scene(root, 1000, 670);
+            Scene scene = new Scene(root, 1100, 670);
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception e) {

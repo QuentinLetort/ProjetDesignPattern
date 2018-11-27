@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.chart.PieChart?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.121"
-            fx:controller="edu.insightr.gildedrose.InventoryController">
 
-    <TableView fx:id="itemTable" layoutX="14.0" layoutY="14.0" prefHeight="600.0" prefWidth="500.0">
+<AnchorPane prefHeight="655.0" prefWidth="1181.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.insightr.gildedrose.InventoryController">
+
+    <TableView fx:id="itemTable" layoutX="14.0" layoutY="14.0" prefHeight="600.0" prefWidth="600.0">
         <columns>
             <TableColumn prefWidth="300.0" text="Name">
                 <cellValueFactory>
@@ -24,10 +26,15 @@
                     <PropertyValueFactory property="quality" />
                 </cellValueFactory>
             </TableColumn>
+            <TableColumn prefWidth="100.0" text="creationdate">
+                <cellValueFactory>
+                    <PropertyValueFactory property="creationdate" />
+                </cellValueFactory>
+            </TableColumn>
         </columns>
     </TableView>
     <Button layoutX="195.0" layoutY="624.0" onAction="#onUpdate" text="Update" />
     <Button layoutX="101.0" layoutY="624.0" mnemonicParsing="false" onAction="#onLoad" text="Load File" />
-    <PieChart fx:id="pieChart" layoutX="541.0" layoutY="128.0"/>
+    <PieChart fx:id="pieChart" layoutX="632.0" layoutY="23.0" />
 
 </AnchorPane>

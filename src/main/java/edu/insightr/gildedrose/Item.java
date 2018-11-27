@@ -1,17 +1,20 @@
 package edu.insightr.gildedrose;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Item {
     private String name;
     private int sellIn;
     private int quality;
+    private LocalDate creationdate;
 
-    public Item(String name, int sellIn, int quality) {
+    public Item(String name, int sellIn, int quality, LocalDate creationdate) {
         super();
         this.name = name;
         this.sellIn = sellIn;
         this.quality = quality;
+        this.creationdate = creationdate;
     }
 
     public String getName() {
@@ -38,6 +41,10 @@ public class Item {
         this.quality = quality;
     }
 
+    public LocalDate getCreationDate (){ return creationdate; }
+
+    public void setCreationDate (LocalDate creationdate) { this.creationdate = creationdate;}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -45,12 +52,13 @@ public class Item {
         Item item = (Item) o;
         return sellIn == item.sellIn &&
                 quality == item.quality &&
-                Objects.equals(name, item.name);
+                Objects.equals(name, item.name) &&
+                creationdate == item.creationdate;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, sellIn, quality);
+        return Objects.hash(name, sellIn, quality, creationdate);
     }
 
     @Override
@@ -59,6 +67,7 @@ public class Item {
                 "name='" + name + '\'' +
                 ", sellIn=" + sellIn +
                 ", quality=" + quality +
+                ", creationdate=" + creationdate +
                 '}';
     }
 }
