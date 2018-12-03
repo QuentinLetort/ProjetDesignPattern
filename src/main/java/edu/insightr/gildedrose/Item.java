@@ -41,9 +41,13 @@ public class Item {
         this.quality = quality;
     }
 
-    public LocalDate getCreationDate (){ return creationdate; }
+    public LocalDate getCreationdate() {
+        return creationdate;
+    }
 
-    public void setCreationDate (LocalDate creationdate) { this.creationdate = creationdate;}
+    public void setCreationdate(LocalDate creationdate) {
+        this.creationdate = creationdate;
+    }
 
     @Override
     public boolean equals(Object o) {

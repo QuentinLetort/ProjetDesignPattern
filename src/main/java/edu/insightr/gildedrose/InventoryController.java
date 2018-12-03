@@ -34,8 +34,7 @@ public class InventoryController implements Initializable {
 
     public void onUpdate() {
         inventory.updateQuality();
-        itemData.setAll(inventory.getItems());
-        itemTable.getItems().setAll(itemData);
+        itemTable.refresh();
     }
 
     private void AffichePieChart() {
@@ -58,9 +57,10 @@ public class InventoryController implements Initializable {
             fc.getExtensionFilters().add(new ExtensionFilter("JSON Files", "*.json"));
             File selectedFile = fc.showOpenDialog(null);
             if (selectedFile != null) {
-                inventory.addItems(inventory.ListItemsFromJSON(selectedFile.getAbsolutePath()));
-                itemData.setAll(inventory.getItems());
-                itemTable.getItems().setAll(itemData);
+                Item[] newItems = inventory.ListItemsFromJSON(selectedFile.getAbsolutePath());
+                inventory.addItems(newItems);
+                itemData.addAll(newItems);
+                itemTable.getItems().addAll(newItems);
                 AffichePieChart();
             }
         } catch (Exception e) {

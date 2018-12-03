@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.chart.PieChart?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
-
 <AnchorPane prefHeight="655.0" prefWidth="1181.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.insightr.gildedrose.InventoryController">
 
     <TableView fx:id="itemTable" layoutX="14.0" layoutY="14.0" prefHeight="600.0" prefWidth="600.0">
@@ -26,7 +23,7 @@
                     <PropertyValueFactory property="quality" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="100.0" text="creationdate">
+            <TableColumn prefWidth="100.0" text="Creationdate">
                 <cellValueFactory>
                     <PropertyValueFactory property="creationdate" />
                 </cellValueFactory>
