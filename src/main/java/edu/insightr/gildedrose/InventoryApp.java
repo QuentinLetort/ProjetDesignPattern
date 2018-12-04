@@ -14,13 +14,15 @@ public class InventoryApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
+
             Parent root = FXMLLoader.load(getClass().getResource("/Inventory.fxml"));
             Scene scene = new Scene(root, 1000, 670);
             primaryStage.setScene(scene);
             primaryStage.show();
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }

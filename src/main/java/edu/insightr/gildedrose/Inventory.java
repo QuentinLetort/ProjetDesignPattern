@@ -7,6 +7,7 @@ import org.json.simple.parser.JSONParser;
 import java.io.FileReader;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.Map;
 
 public class Inventory {
@@ -221,4 +222,25 @@ public class Inventory {
 
     }
 
+    public Map<Integer, Integer> quantityPerSellIn(){
+
+        // run the item list.
+        // check sell in
+        // IF the sell in doesn't exist in the map THEN add it to the map
+        // ELSE increased the number of item of this sell in +1
+
+        Map<Integer, Integer> quantityPerItem = new TreeMap<>();
+
+        for (Item item : items){
+            int sellIn = item.getSellIn();
+
+            if (quantityPerItem.get(sellIn) == null) {
+                quantityPerItem.put(sellIn, 1);
+            }else{
+                quantityPerItem.put(sellIn, quantityPerItem.get(sellIn)+1);
+            }
+        }
+
+        return quantityPerItem;
+    }
 }
