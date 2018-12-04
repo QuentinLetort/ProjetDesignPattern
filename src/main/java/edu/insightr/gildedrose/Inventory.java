@@ -5,9 +5,11 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.FileReader;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.TreeMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class Inventory {
@@ -48,7 +50,13 @@ public class Inventory {
                 String name = (String) item.get("name");
                 long sellIn = (long) item.get("sellIn");
                 long quality = (long) item.get("quality");
-                inv[i] = new Item(name, (int) sellIn, (int) quality);
+                String creationdate = (String) item.get("creationdate");
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                formatter = formatter.withLocale( Locale.FRENCH );
+                LocalDate date = LocalDate.parse(creationdate, formatter);
+
+                inv[i] = new Item(name, (int) sellIn, (int) quality, date);
             }
 
         } catch (Exception e) {

@@ -17,13 +17,16 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
-import java.util.*;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.Set;
 
 public class InventoryController implements Initializable {
+
 
     private ObservableList<Item> itemData = FXCollections.observableArrayList();
     @FXML
@@ -47,10 +50,8 @@ public class InventoryController implements Initializable {
 
     public void onUpdate() {
         inventory.updateQuality();
-        itemData.setAll(inventory.getItems());
-        itemTable.getItems().setAll(itemData);
-
-        afficheBarChartItemPerSellin();
+        itemTable.refresh();
+       afficheBarChartItemPerSellin();
     }
 
     private void AffichePieChart() {
@@ -73,9 +74,10 @@ public class InventoryController implements Initializable {
             fc.getExtensionFilters().add(new ExtensionFilter("JSON Files", "*.json"));
             File selectedFile = fc.showOpenDialog(null);
             if (selectedFile != null) {
-                inventory.addItems(inventory.ListItemsFromJSON(selectedFile.getAbsolutePath()));
-                itemData.setAll(inventory.getItems());
-                itemTable.getItems().setAll(itemData);
+                Item[] newItems = inventory.ListItemsFromJSON(selectedFile.getAbsolutePath());
+                inventory.addItems(newItems);
+                itemData.addAll(newItems);
+                itemTable.getItems().addAll(newItems);
                 AffichePieChart();
                 afficheBarChartItemPerSellin();
             }

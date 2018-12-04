@@ -10,9 +10,9 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="843.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.insightr.gildedrose.InventoryController">
+<AnchorPane prefHeight="655.0" prefWidth="1181.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.insightr.gildedrose.InventoryController">
 
-    <TableView fx:id="itemTable" layoutX="14.0" layoutY="14.0" prefHeight="600.0" prefWidth="500.0">
+    <TableView fx:id="itemTable" layoutX="14.0" layoutY="14.0" prefHeight="600.0" prefWidth="600.0">
         <columns>
             <TableColumn prefWidth="300.0" text="Name">
                 <cellValueFactory>
@@ -27,6 +27,11 @@
             <TableColumn prefWidth="100.0" text="Quality">
                 <cellValueFactory>
                     <PropertyValueFactory property="quality" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="100.0" text="Creationdate">
+                <cellValueFactory>
+                    <PropertyValueFactory property="creationdate" />
                 </cellValueFactory>
             </TableColumn>
         </columns>
