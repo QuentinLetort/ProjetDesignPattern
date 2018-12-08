@@ -4,22 +4,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
+import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.TableView;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
-
 import java.io.File;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -36,7 +30,10 @@ public class InventoryController implements Initializable {
     PieChart pieChart;
 
     @FXML
-    BarChart<String, Integer> barChart;
+    BarChart<String, Number> barChartSellIn;
+
+    @FXML
+    BarChart<String, Number> barChartDate;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -44,14 +41,15 @@ public class InventoryController implements Initializable {
         itemData.setAll(inventory.getItems());
         itemTable.getItems().setAll(itemData);
         AffichePieChart();
-
         afficheBarChartItemPerSellin();
+        afficheBarChartItemPerDate();
     }
 
     public void onUpdate() {
         inventory.updateQuality();
+        afficheBarChartItemPerSellin();
         itemTable.refresh();
-       afficheBarChartItemPerSellin();
+
     }
 
     private void AffichePieChart() {
@@ -80,34 +78,59 @@ public class InventoryController implements Initializable {
                 itemTable.getItems().addAll(newItems);
                 AffichePieChart();
                 afficheBarChartItemPerSellin();
+                afficheBarChartItemPerDate();
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    private void afficheBarChartItemPerSellin(){
-        barChart.getData().clear();
-
-        barChart.setTitle("Number of items as a function of the sell in");
-        barChart.getXAxis().setLabel("Sell In");
-        barChart.getYAxis().setLabel("Number of items");
+    private void afficheBarChartItemPerSellin() {
+        barChartDate.setAnimated(false);
+        barChartSellIn.setCategoryGap(10.0);
+        barChartSellIn.getXAxis().setLabel("Sell In");
+        barChartSellIn.getYAxis().setLabel("Number of items");
+        barChartSellIn.setTitle("Number of items as a function of the sell in");
         Map<Integer, Integer> mapItem;
         mapItem = inventory.quantityPerSellIn();
 
-        Set<Map.Entry<Integer,Integer>> setMapItem = mapItem.entrySet();
-        Iterator<Map.Entry<Integer,Integer>> it = setMapItem.iterator();
+        Set<Map.Entry<Integer, Integer>> setMapItem = mapItem.entrySet();
+        Iterator<Map.Entry<Integer, Integer>> it = setMapItem.iterator();
 
         XYChart.Series bar = new XYChart.Series();
 
         bar.setName("items");
 
-        while(it.hasNext()){
+        while (it.hasNext()) {
             Map.Entry<Integer, Integer> e = it.next();
-            bar.getData().add(new XYChart.Data<>(String.valueOf(e.getKey()), e.getValue()));
+            bar.getData().add(new XYChart.Data<>(String.valueOf(e.getKey()), (Number) e.getValue()));
         }
-        System.out.println(bar);
-        barChart.getData().add(bar);
+        barChartSellIn.setData(FXCollections.observableArrayList(bar));
+    }
+
+    private void afficheBarChartItemPerDate() {
+        barChartDate.setAnimated(false);
+        barChartDate.setCategoryGap(10.0);
+        barChartDate.getXAxis().setLabel("Creation Date");
+        barChartDate.getYAxis().setLabel("Number of items");
+        barChartDate.setTitle("Number of items as a function of the creation date");
+        Map<LocalDate, Integer> mapItem;
+        mapItem = inventory.quantityPerDate();
+
+        Set<Map.Entry<LocalDate, Integer>> setMapItem = mapItem.entrySet();
+        Iterator<Map.Entry<LocalDate, Integer>> it = setMapItem.iterator();
+
+        XYChart.Series bar = new XYChart.Series();
+
+        bar.setName("items");
+
+        while (it.hasNext()) {
+            Map.Entry<LocalDate, Integer> e = it.next();
+            bar.getData().add(new XYChart.Data<>(String.valueOf(e.getKey()), (Number) e.getValue()));
+        }
+        System.out.println(bar.getData());
+        barChartDate.setData(FXCollections.observableArrayList(bar));
+
     }
 
 }

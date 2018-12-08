@@ -53,7 +53,7 @@ public class Inventory {
                 String creationdate = (String) item.get("creationdate");
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                formatter = formatter.withLocale( Locale.FRENCH );
+                formatter = formatter.withLocale(Locale.FRENCH);
                 LocalDate date = LocalDate.parse(creationdate, formatter);
 
                 inv[i] = new Item(name, (int) sellIn, (int) quality, date);
@@ -70,6 +70,15 @@ public class Inventory {
     }
 
     private void printInventory() {
+        System.out.println("***************");
+        for (Item item : items) {
+            System.out.println(item);
+        }
+        System.out.println("***************");
+        System.out.println("\n");
+    }
+
+    private void printInventory(Item[] items) {
         System.out.println("***************");
         for (Item item : items) {
             System.out.println(item);
@@ -230,25 +239,48 @@ public class Inventory {
 
     }
 
-    public Map<Integer, Integer> quantityPerSellIn(){
+    public Map<Integer, Integer> quantityPerSellIn() {
 
         // run the item list.
         // check sell in
         // IF the sell in doesn't exist in the map THEN add it to the map
         // ELSE increased the number of item of this sell in +1
 
-        Map<Integer, Integer> quantityPerItem = new TreeMap<>();
+        Map<Integer, Integer> quantityPerItem = new HashMap<>();
 
-        for (Item item : items){
+        for (Item item : items) {
             int sellIn = item.getSellIn();
 
             if (quantityPerItem.get(sellIn) == null) {
                 quantityPerItem.put(sellIn, 1);
-            }else{
-                quantityPerItem.put(sellIn, quantityPerItem.get(sellIn)+1);
+            } else {
+                int compteur = quantityPerItem.get(sellIn);
+                quantityPerItem.replace(sellIn, compteur + 1);
             }
         }
 
         return quantityPerItem;
+    }
+
+    public Map<LocalDate, Integer> quantityPerDate() {
+
+        // run the item list.
+        // check sell in
+        // IF the sell in doesn't exist in the map THEN add it to the map
+        // ELSE increased the number of item of this sell in +1
+
+        Map<LocalDate, Integer> quantityPerDate = new HashMap<>();
+
+        for (Item item : items) {
+            LocalDate date = item.getCreationdate();
+            if (quantityPerDate.get(date) == null) {
+                quantityPerDate.put(date, 1);
+            } else {
+                int compteur = quantityPerDate.get(date);
+                quantityPerDate.replace(date, compteur + 1);
+            }
+        }
+
+        return quantityPerDate;
     }
 }
