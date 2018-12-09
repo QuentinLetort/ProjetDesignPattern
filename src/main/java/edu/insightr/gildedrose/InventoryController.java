@@ -50,6 +50,8 @@ public class InventoryController implements Initializable {
         pieChart.setData(pieChartData);
     }
 
+
+
     public void onLoad() {
         try {
             FileChooser fc = new FileChooser();

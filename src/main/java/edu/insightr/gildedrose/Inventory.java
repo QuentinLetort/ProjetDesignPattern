@@ -230,4 +230,27 @@ public class Inventory {
 
     }
 
+    public void buyItem(String nameItem, int sellinItem, int qualityItem, LocalDate dateItem) {
+        Item itemBought = new Item(nameItem,sellinItem,qualityItem,dateItem);
+        Item[] inv = new Item[this.items.length + 1];
+        System.arraycopy(this.items, 0, inv, 0, this.items.length);
+        System.arraycopy(itemBought, 0, inv, this.items.length, 1);
+        this.items = inv;
+    }
+
+    public void sellItem(Item itemName) {
+        Item[] inv = new Item[this.items.length - 1];
+        int index = 0;
+        try {
+            while (!itemName.equals(this.items[index]) || index > this.items.length) {
+                    inv[index] = this.items[index];
+                    index++;
+            }
+            System.arraycopy(this.items, index + 1, inv, index, this.items.length - (index +1));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
