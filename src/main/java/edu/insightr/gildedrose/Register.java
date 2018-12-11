@@ -1,12 +1,11 @@
 package edu.insightr.gildedrose;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Register {
     private ArrayList<Transaction> transactions;
 
-    public Register(ArrayList<Transaction> transactions) {this.transactions = transactions;}
+    public Register() {this.transactions = new ArrayList<Transaction>();}
 
     public ArrayList<Transaction> getTransactions() { return transactions; }
 
