@@ -53,7 +53,7 @@ public class Inventory {
                 String creationdate = (String) item.get("creationdate");
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                formatter = formatter.withLocale(Locale.FRENCH);
+                formatter = formatter.withLocale( Locale.FRENCH );
                 LocalDate date = LocalDate.parse(creationdate, formatter);
 
                 inv[i] = new Item(name, (int) sellIn, (int) quality, date);
@@ -70,15 +70,6 @@ public class Inventory {
     }
 
     private void printInventory() {
-        System.out.println("***************");
-        for (Item item : items) {
-            System.out.println(item);
-        }
-        System.out.println("***************");
-        System.out.println("\n");
-    }
-
-    private void printInventory(Item[] items) {
         System.out.println("***************");
         for (Item item : items) {
             System.out.println(item);
@@ -283,4 +274,27 @@ public class Inventory {
 
         return quantityPerDate;
     }
+    public void buyItem(String nameItem, int sellinItem, int qualityItem, LocalDate dateItem) {
+        Item itemBought = new Item(nameItem,sellinItem,qualityItem,dateItem);
+        Item[] inv = new Item[this.items.length + 1];
+        System.arraycopy(this.items, 0, inv, 0, this.items.length);
+        System.arraycopy(itemBought, 0, inv, this.items.length, 1);
+        this.items = inv;
+    }
+
+    public void sellItem(Item itemName) {
+        Item[] inv = new Item[this.items.length - 1];
+        int index = 0;
+        try {
+            while (!itemName.equals(this.items[index]) || index > this.items.length) {
+                    inv[index] = this.items[index];
+                    index++;
+            }
+            System.arraycopy(this.items, index + 1, inv, index, this.items.length - (index +1));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
