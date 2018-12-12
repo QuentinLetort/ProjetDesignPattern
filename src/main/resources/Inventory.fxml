@@ -2,31 +2,44 @@
 
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="655.0" prefWidth="1181.0"
             xmlns="http://javafx.com/javafx/8.0.121" fx:controller="edu.insightr.gildedrose.InventoryController">
+
+
 
     <TableView fx:id="itemTable" layoutX="14.0" layoutY="14.0" prefHeight="600.0" prefWidth="600.0">
         <columns>
             <TableColumn prefWidth="300.0" text="Name">
                 <cellValueFactory>
-                    <PropertyValueFactory property="name"/>
+                    <PropertyValueFactory property="name" />
                 </cellValueFactory>
             </TableColumn>
             <TableColumn prefWidth="100.0" text="SellIn">
                 <cellValueFactory>
-                    <PropertyValueFactory property="sellIn"/>
+                    <PropertyValueFactory property="sellIn" />
                 </cellValueFactory>
             </TableColumn>
             <TableColumn prefWidth="100.0" text="Quality">
                 <cellValueFactory>
-                    <PropertyValueFactory property="quality"/>
+                    <PropertyValueFactory property="quality" />
                 </cellValueFactory>
             </TableColumn>
             <TableColumn prefWidth="100.0" text="Creationdate">
                 <cellValueFactory>
-                    <PropertyValueFactory property="creationdate"/>
+                    <PropertyValueFactory property="creationdate" />
                 </cellValueFactory>
             </TableColumn>
         </columns>
@@ -50,5 +63,42 @@
             <NumberAxis side="LEFT"/>
         </yAxis>
     </BarChart>
+    <Button layoutX="195.0" layoutY="624.0" onAction="#onUpdate" text="Update" />
+    <Button layoutX="101.0" layoutY="624.0" mnemonicParsing="false" onAction="#onLoad" text="Load File" />
+   <Label fx:id="labelBuySellName" layoutX="648.0" layoutY="435.0" text="Nom" />
+   <Label fx:id="labelBuySellSellIn" layoutX="644.0" layoutY="474.0" text="Sell in" />
+   <Label fx:id="labelBuySellQuality" layoutX="647.0" layoutY="512.0" text="Quality" />
+   <Label fx:id="labelBuySellCreationDate" layoutX="641.0" layoutY="554.0" text="Creationdate" />
+   <Button fx:id="buttonBuy" layoutX="719.0" layoutY="599.0" mnemonicParsing="false" text="Buy" />
+   <Button fx:id="buttonSell" disable="true" layoutX="807.0" layoutY="599.0" mnemonicParsing="false" text="Sell">
+      <opaqueInsets>
+         <Insets />
+      </opaqueInsets>
+   </Button>
+   <DatePicker fx:id="datePickerBuySell" layoutX="741.0" layoutY="549.0" prefHeight="31.0" prefWidth="200.0" />
+   <TextField fx:id="textFieldQuality" layoutX="741.0" layoutY="507.0" prefHeight="31.0" prefWidth="200.0" />
+   <TextField fx:id="textFieldSellIn" layoutX="741.0" layoutY="469.0" prefHeight="31.0" prefWidth="200.0" />
+   <TableView fx:id="tableViewBoughtSoldList" layoutX="641.0" layoutY="14.0" prefHeight="400.0" prefWidth="511.0">
+     <columns>
+       <TableColumn prefWidth="162.0" text="Name" />
+         <TableColumn prefWidth="52.0" text="SellIn" />
+         <TableColumn prefWidth="69.0" text="Quality" />
+         <TableColumn prefWidth="110.0" text="CreationDate" />
+         <TableColumn prefWidth="65.0" text="Bought" />
+         <TableColumn prefWidth="52.0" text="Sold" />
+     </columns>
+   </TableView>
+   <ChoiceBox fx:id="choiceBoxName" layoutX="741.0" layoutY="430.0" prefHeight="31.0" prefWidth="200.0" >
+       <items>
+           <FXCollections fx:factory="observableArrayList">
+               <String fx:value="Aged Brie"/>
+               <String fx:value="Backstage Passes to Concert"/>
+               <String fx:value="Conjured Mana Cake"/>
+               <String fx:value="Dexterity Vest"/>
+               <String fx:value="Elixir of the Mongoose"/>
+               <String fx:value="Sulfuras Hand of Ragnaros"/>
+           </FXCollections>
+       </items>
+   </ChoiceBox>
 
 </AnchorPane>

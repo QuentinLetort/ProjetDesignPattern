@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -28,6 +29,8 @@ public class InventoryController implements Initializable {
     private Inventory inventory = null;
     @FXML
     PieChart pieChart;
+    @FXML
+    private Button buttonSell;
 
     @FXML
     BarChart<String, Number> barChartSellIn;
@@ -135,4 +138,14 @@ public class InventoryController implements Initializable {
 
     }
 
+
+    public void sellItem() {
+        try {
+            buttonSell.setDisable(false);
+            inventory.sellItem(itemTable.getSelectionModel().getSelectedItem());
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
