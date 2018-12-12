@@ -2,31 +2,39 @@ package edu.insightr.gildedrose;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class InventoryController implements Initializable {
 
-
     private ObservableList<Item> itemData = FXCollections.observableArrayList();
     @FXML
+    ChoiceBox choiceBoxName;
+    @FXML
+    TextField textFieldSellIn;
+    @FXML
+    TextField textFieldQuality;
+    @FXML
+    DatePicker datePickerCreationdate;
+
+    @FXML
     private TableView<Item> itemTable;
-    private Inventory inventory = null;
+    @FXML
+    Label dateOfTheDay;
+
     @FXML
     PieChart pieChart;
     @FXML
@@ -37,22 +45,37 @@ public class InventoryController implements Initializable {
 
     @FXML
     BarChart<String, Number> barChartDate;
+    private ObservableList<Transaction> transactionData = FXCollections.observableArrayList();
+    private Inventory inventory = null;
+    private Register register = null;
+    private LocalDate date;
+    @FXML
+    private TableView<Transaction> transactionTable;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         inventory = new Inventory();
+        register = new Register();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        formatter = formatter.withLocale(Locale.FRENCH);
+        date = LocalDate.parse("2018-12-13", formatter);
+        dateOfTheDay.setText(date.toString());
         itemData.setAll(inventory.getItems());
         itemTable.getItems().setAll(itemData);
+        transactionData.setAll(register.getTransactions());
+        transactionTable.getItems().setAll(transactionData);
         AffichePieChart();
         afficheBarChartItemPerSellin();
         afficheBarChartItemPerDate();
+        itemTable.getSelectionModel().selectedItemProperty().addListener(e -> buttonSell.setDisable(false));
     }
 
     public void onUpdate() {
+        date = date.plusDays(1);
+        dateOfTheDay.setText(date.toString());
         inventory.updateQuality();
         afficheBarChartItemPerSellin();
         itemTable.refresh();
-
     }
 
     private void AffichePieChart() {
@@ -67,8 +90,6 @@ public class InventoryController implements Initializable {
                         new PieChart.Data("Elixir", itemsQuantity.get(Inventory.ELIXIR_OF_THE_MONGOOSE)));
         pieChart.setData(pieChartData);
     }
-
-
 
     public void onLoad() {
         try {
@@ -91,7 +112,7 @@ public class InventoryController implements Initializable {
     }
 
     private void afficheBarChartItemPerSellin() {
-        barChartDate.setAnimated(false);
+        barChartSellIn.setAnimated(false);
         barChartSellIn.setCategoryGap(10.0);
         barChartSellIn.getXAxis().setLabel("Sell In");
         barChartSellIn.getYAxis().setLabel("Number of items");
@@ -110,6 +131,7 @@ public class InventoryController implements Initializable {
             Map.Entry<Integer, Integer> e = it.next();
             bar.getData().add(new XYChart.Data<>(String.valueOf(e.getKey()), (Number) e.getValue()));
         }
+
         barChartSellIn.setData(FXCollections.observableArrayList(bar));
     }
 
@@ -133,18 +155,58 @@ public class InventoryController implements Initializable {
             Map.Entry<LocalDate, Integer> e = it.next();
             bar.getData().add(new XYChart.Data<>(String.valueOf(e.getKey()), (Number) e.getValue()));
         }
-        System.out.println(bar.getData());
         barChartDate.setData(FXCollections.observableArrayList(bar));
-
     }
 
+    public void onSell(ActionEvent actionEvent) {
+        Item itemSell = itemTable.getSelectionModel().getSelectedItem();
+        inventory.sellItem(itemTable.getSelectionModel().getSelectedItem());
+        itemTable.getItems().remove(itemSell);
+        Transaction transaction = new Transaction(itemSell, date, Transaction.Transactiontype.sell);
+        register.addTransactions(transaction);
+        transactionTable.getItems().add(transaction);
+        AffichePieChart();
+        afficheBarChartItemPerSellin();
+        afficheBarChartItemPerDate();
+    }
 
-    public void sellItem() {
+    public void onBuy(ActionEvent actionEvent) {
         try {
-            buttonSell.setDisable(false);
-            inventory.sellItem(itemTable.getSelectionModel().getSelectedItem());
-        }
-        catch (Exception e) {
+            int sellIn = Integer.parseInt(textFieldSellIn.getText());
+            int quality = Integer.parseInt(textFieldQuality.getText());
+            LocalDate datecreation = datePickerCreationdate.getValue();
+            String name = "";
+            switch (choiceBoxName.getSelectionModel().getSelectedIndex()) {
+                case 0:
+                    name = Inventory.AGED_BRIE;
+                    break;
+                case 1:
+                    name = Inventory.BACKSTAGE_PASSES_TO_CONCERT;
+                    break;
+                case 2:
+                    name = Inventory.CONJURED_MANA_CAKE;
+                    break;
+                case 3:
+                    name = Inventory.DEXTERITY_VEST;
+                    break;
+                case 4:
+                    name = Inventory.ELIXIR_OF_THE_MONGOOSE;
+                    break;
+                case 5:
+                    name = Inventory.SULFURAS_HAND_OF_RAGNAROS;
+                    break;
+            }
+            Item itemBought = new Item(name, sellIn, quality, datecreation);
+            inventory.buyItem(itemBought);
+            itemTable.getItems().add(itemBought);
+            Transaction transaction = new Transaction(itemBought, date, Transaction.Transactiontype.buy);
+            register.addTransactions(transaction);
+            transactionTable.getItems().add(transaction);
+            AffichePieChart();
+            afficheBarChartItemPerSellin();
+            afficheBarChartItemPerDate();
+
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }

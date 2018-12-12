@@ -1,53 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.PieChart?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
+<?import java.lang.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="655.0" prefWidth="1181.0"
             xmlns="http://javafx.com/javafx/8.0.121" fx:controller="edu.insightr.gildedrose.InventoryController">
 
 
-
-    <TableView fx:id="itemTable" layoutX="14.0" layoutY="14.0" prefHeight="600.0" prefWidth="600.0">
+    <TableView fx:id="itemTable" layoutX="6.0" layoutY="30.0" prefHeight="300.0" prefWidth="420.0">
         <columns>
-            <TableColumn prefWidth="300.0" text="Name">
+            <TableColumn prefWidth="220.0" text="Name">
                 <cellValueFactory>
-                    <PropertyValueFactory property="name" />
+                    <PropertyValueFactory property="name"/>
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="100.0" text="SellIn">
+            <TableColumn prefWidth="50.0" text="SellIn">
                 <cellValueFactory>
-                    <PropertyValueFactory property="sellIn" />
+                    <PropertyValueFactory property="sellIn"/>
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="100.0" text="Quality">
+            <TableColumn prefWidth="50.0" text="Quality">
                 <cellValueFactory>
-                    <PropertyValueFactory property="quality" />
+                    <PropertyValueFactory property="quality"/>
                 </cellValueFactory>
             </TableColumn>
             <TableColumn prefWidth="100.0" text="Creationdate">
                 <cellValueFactory>
-                    <PropertyValueFactory property="creationdate" />
+                    <PropertyValueFactory property="creationdate"/>
                 </cellValueFactory>
             </TableColumn>
         </columns>
     </TableView>
-    <Button layoutX="195.0" layoutY="624.0" onAction="#onUpdate" text="Update"/>
-    <Button layoutX="101.0" layoutY="624.0" mnemonicParsing="false" onAction="#onLoad" text="Load File"/>
-    <PieChart fx:id="pieChart" layoutX="643.0" layoutY="21.0" prefHeight="293.0" prefWidth="348.0"/>
-    <BarChart fx:id="barChartSellIn" layoutX="623.0" layoutY="336.0" prefHeight="249.0" prefWidth="377.0">
+    <PieChart fx:id="pieChart" layoutX="565.0" layoutY="76.0" prefHeight="293.0" prefWidth="348.0"/>
+    <BarChart fx:id="barChartSellIn" layoutX="855.0" layoutY="389.0" prefHeight="249.0" prefWidth="377.0">
         <xAxis>
             <CategoryAxis side="BOTTOM"/>
         </xAxis>
@@ -55,7 +44,7 @@
             <NumberAxis side="LEFT"/>
         </yAxis>
     </BarChart>
-    <BarChart fx:id="barChartDate" layoutX="1013.0" layoutY="50.0" prefHeight="235.0" prefWidth="206.0">
+    <BarChart fx:id="barChartDate" layoutX="960.0" layoutY="114.0" prefHeight="235.0" prefWidth="206.0">
         <xAxis>
             <CategoryAxis side="BOTTOM"/>
         </xAxis>
@@ -63,42 +52,53 @@
             <NumberAxis side="LEFT"/>
         </yAxis>
     </BarChart>
-    <Button layoutX="195.0" layoutY="624.0" onAction="#onUpdate" text="Update" />
-    <Button layoutX="101.0" layoutY="624.0" mnemonicParsing="false" onAction="#onLoad" text="Load File" />
-   <Label fx:id="labelBuySellName" layoutX="648.0" layoutY="435.0" text="Nom" />
-   <Label fx:id="labelBuySellSellIn" layoutX="644.0" layoutY="474.0" text="Sell in" />
-   <Label fx:id="labelBuySellQuality" layoutX="647.0" layoutY="512.0" text="Quality" />
-   <Label fx:id="labelBuySellCreationDate" layoutX="641.0" layoutY="554.0" text="Creationdate" />
-   <Button fx:id="buttonBuy" layoutX="719.0" layoutY="599.0" mnemonicParsing="false" text="Buy" />
-   <Button fx:id="buttonSell" disable="true" layoutX="807.0" layoutY="599.0" mnemonicParsing="false" text="Sell">
-      <opaqueInsets>
-         <Insets />
-      </opaqueInsets>
-   </Button>
-   <DatePicker fx:id="datePickerBuySell" layoutX="741.0" layoutY="549.0" prefHeight="31.0" prefWidth="200.0" />
-   <TextField fx:id="textFieldQuality" layoutX="741.0" layoutY="507.0" prefHeight="31.0" prefWidth="200.0" />
-   <TextField fx:id="textFieldSellIn" layoutX="741.0" layoutY="469.0" prefHeight="31.0" prefWidth="200.0" />
-   <TableView fx:id="tableViewBoughtSoldList" layoutX="641.0" layoutY="14.0" prefHeight="400.0" prefWidth="511.0">
-     <columns>
-       <TableColumn prefWidth="162.0" text="Name" />
-         <TableColumn prefWidth="52.0" text="SellIn" />
-         <TableColumn prefWidth="69.0" text="Quality" />
-         <TableColumn prefWidth="110.0" text="CreationDate" />
-         <TableColumn prefWidth="65.0" text="Bought" />
-         <TableColumn prefWidth="52.0" text="Sold" />
-     </columns>
-   </TableView>
-   <ChoiceBox fx:id="choiceBoxName" layoutX="741.0" layoutY="430.0" prefHeight="31.0" prefWidth="200.0" >
-       <items>
-           <FXCollections fx:factory="observableArrayList">
-               <String fx:value="Aged Brie"/>
-               <String fx:value="Backstage Passes to Concert"/>
-               <String fx:value="Conjured Mana Cake"/>
-               <String fx:value="Dexterity Vest"/>
-               <String fx:value="Elixir of the Mongoose"/>
-               <String fx:value="Sulfuras Hand of Ragnaros"/>
-           </FXCollections>
-       </items>
-   </ChoiceBox>
+    <Button layoutX="455.0" layoutY="113.0" onAction="#onUpdate" text="Update"/>
+    <Button layoutX="450.0" layoutY="164.0" mnemonicParsing="false" onAction="#onLoad" text="Load File"/>
+    <Label layoutX="525.0" layoutY="464.0" text="Nom"/>
+    <Label layoutX="521.0" layoutY="554.0" text="Sell in"/>
+    <Label layoutX="517.0" layoutY="513.0" text="Quality"/>
+    <Label layoutX="486.0" layoutY="599.0" text="Creationdate"/>
+    <Button layoutX="621.0" layoutY="648.0" mnemonicParsing="false" onAction="#onBuy" text="Buy"/>
+    <Button fx:id="buttonSell" disable="true" layoutX="468.0" layoutY="216.0" mnemonicParsing="false" onAction="#onSell"
+            text="Sell">
+        <opaqueInsets>
+            <Insets/>
+        </opaqueInsets>
+    </Button>
+    <DatePicker fx:id="datePickerCreationdate" layoutX="584.0" layoutY="594.0" prefHeight="31.0" prefWidth="200.0"/>
+    <TextField fx:id="textFieldQuality" layoutX="584.0" layoutY="549.0" prefHeight="31.0" prefWidth="200.0"/>
+    <TextField fx:id="textFieldSellIn" layoutX="584.0" layoutY="508.0" prefHeight="31.0" prefWidth="200.0"/>
+    <TableView fx:id="transactionTable" layoutX="14.0" layoutY="349.0" prefHeight="366.0" prefWidth="370.0">
+        <columns>
+            <TableColumn prefWidth="220.0" text="Name">
+                <cellValueFactory>
+                    <PropertyValueFactory property="item"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="100.0" text="Transactiondate">
+                <cellValueFactory>
+                    <PropertyValueFactory property="transactiondate"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="50.0" text="Type">
+                <cellValueFactory>
+                    <PropertyValueFactory property="transactiontype"/>
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+    <ChoiceBox fx:id="choiceBoxName" layoutX="584.0" layoutY="459.0" prefHeight="31.0" prefWidth="200.0">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Aged Brie"/>
+                <String fx:value="Backstage Passes to Concert"/>
+                <String fx:value="Conjured Mana Cake"/>
+                <String fx:value="Dexterity Vest"/>
+                <String fx:value="Elixir of the Mongoose"/>
+                <String fx:value="Sulfuras Hand of Ragnaros"/>
+            </FXCollections>
+        </items>
+    </ChoiceBox>
+    <Label fx:id="dateOfTheDay" layoutX="486.0" layoutY="44.0"/>
 
 </AnchorPane>

@@ -3,8 +3,8 @@ package edu.insightr.gildedrose;
 import java.time.LocalDate;
 
 public class Transaction {
-    private enum Transactiontype {
-        sell, buy
+    public String getItem() {
+        return item.getName();
     }
 
     private Item item;
@@ -20,7 +20,9 @@ public class Transaction {
         this.transactiontype = transactiontype;
     }
 
-    public Item getItem() { return item; }
+    public void setTransactiontype(Transactiontype transactiontype) {
+        this.transactiontype = transactiontype;
+    }
 
     public LocalDate getTransactiondate() { return transactiondate;}
 
@@ -30,5 +32,16 @@ public class Transaction {
 
     public void setTransactiondate(LocalDate transactiondate) {this.transactiondate = transactiondate;}
 
-    public void setTransactiontype(Transactiontype transactiontype) {this.transactiondate = transactiondate;}
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "item=" + item.getName() +
+                ", transactiondate=" + transactiondate +
+                ", transactiontype=" + transactiontype +
+                '}';
+    }
+
+    public enum Transactiontype {
+        sell, buy
+    }
 }

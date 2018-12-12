@@ -29,7 +29,6 @@ public class Inventory {
 
     }
 
-
     public Inventory(Item[] items) {
         super();
         this.items = items;
@@ -53,7 +52,7 @@ public class Inventory {
                 String creationdate = (String) item.get("creationdate");
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                formatter = formatter.withLocale( Locale.FRENCH );
+                formatter = formatter.withLocale(Locale.FRENCH);
                 LocalDate date = LocalDate.parse(creationdate, formatter);
 
                 inv[i] = new Item(name, (int) sellIn, (int) quality, date);
@@ -69,7 +68,7 @@ public class Inventory {
         return items;
     }
 
-    private void printInventory() {
+    public void printInventory() {
         System.out.println("***************");
         for (Item item : items) {
             System.out.println(item);
@@ -167,7 +166,6 @@ public class Inventory {
         System.arraycopy(this.items, 0, newItems, 0, this.items.length);
         System.arraycopy(items, 0, newItems, this.items.length, items.length);
         this.items = newItems;
-
     }
 
     @Override
@@ -189,8 +187,6 @@ public class Inventory {
             inventory.updateQuality();
             inventory.printInventory();
         }
-
-
     }
 
     public Map<String, Integer> quantityPerItem() {
@@ -225,9 +221,7 @@ public class Inventory {
         quantity.put(SULFURAS_HAND_OF_RAGNAROS, compteurs[3]);
         quantity.put(BACKSTAGE_PASSES_TO_CONCERT, compteurs[4]);
         quantity.put(CONJURED_MANA_CAKE, compteurs[5]);
-
         return quantity;
-
     }
 
     public Map<Integer, Integer> quantityPerSellIn() {
@@ -274,27 +268,26 @@ public class Inventory {
 
         return quantityPerDate;
     }
-    public void buyItem(String nameItem, int sellinItem, int qualityItem, LocalDate dateItem) {
-        Item itemBought = new Item(nameItem,sellinItem,qualityItem,dateItem);
+
+    public void buyItem(Item itemBought) {
         Item[] inv = new Item[this.items.length + 1];
         System.arraycopy(this.items, 0, inv, 0, this.items.length);
-        System.arraycopy(itemBought, 0, inv, this.items.length, 1);
+        inv[this.items.length] = itemBought;
         this.items = inv;
     }
 
     public void sellItem(Item itemName) {
         Item[] inv = new Item[this.items.length - 1];
         int index = 0;
-        try {
-            while (!itemName.equals(this.items[index]) || index > this.items.length) {
-                    inv[index] = this.items[index];
-                    index++;
+        boolean flag = false;
+        for (Item item : items) {
+            if (!item.equals(itemName) || flag) {
+                inv[index] = item;
+                index++;
+            } else {
+                flag = true;
             }
-            System.arraycopy(this.items, index + 1, inv, index, this.items.length - (index +1));
         }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        items = inv;
     }
-
 }
