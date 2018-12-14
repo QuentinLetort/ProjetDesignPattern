@@ -28,6 +28,25 @@ public class InventoryController implements Initializable {
     TextField textFieldQuality;
     @FXML
     DatePicker datePickerCreationdate;
+    @FXML
+    Label labelNom;
+
+    @FXML
+    Label labelQuality;
+
+    @FXML
+    Label labelSellIn;
+
+    @FXML
+    Label labelCreationDate;
+
+    @FXML
+    Button buttonBuy;
+    @FXML
+    ToggleButton toggleInventory;
+
+    @FXML
+    ToggleButton toggleTransactions;
 
     @FXML
     private TableView<Item> itemTable;
@@ -317,5 +336,47 @@ public class InventoryController implements Initializable {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public void onInventory() {
+        toggleTransactions.setSelected(false);
+        toggleInventory.setSelected(true);
+        choiceBoxName.setVisible(false);
+        textFieldQuality.setVisible(false);
+        textFieldSellIn.setVisible(false);
+        datePickerCreationdate.setVisible(false);
+        pieChart.setVisible(true);
+        buttonSell.setVisible(false);
+        barChartDate.setVisible(true);
+        barChartSellIn.setVisible(true);
+        barChartTransaction.setVisible(false);
+        transactionTable.setVisible(false);
+        ErrorMess.setVisible(false);
+        labelNom.setVisible(false);
+        labelSellIn.setVisible(false);
+        labelCreationDate.setVisible(false);
+        labelQuality.setVisible(false);
+        buttonBuy.setVisible(false);
+    }
+
+    public void onTransactions() {
+        toggleTransactions.setSelected(true);
+        toggleInventory.setSelected(false);
+        choiceBoxName.setVisible(true);
+        textFieldQuality.setVisible(true);
+        textFieldSellIn.setVisible(true);
+        datePickerCreationdate.setVisible(true);
+        pieChart.setVisible(false);
+        buttonSell.setVisible(true);
+        barChartDate.setVisible(false);
+        barChartSellIn.setVisible(false);
+        barChartTransaction.setVisible(true);
+        transactionTable.setVisible(true);
+        ErrorMess.setVisible(false);
+        labelNom.setVisible(true);
+        labelSellIn.setVisible(true);
+        labelCreationDate.setVisible(true);
+        labelQuality.setVisible(true);
+        buttonBuy.setVisible(true);
     }
 }
