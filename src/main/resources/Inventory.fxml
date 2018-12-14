@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import java.lang.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="655.0" prefWidth="1181.0"
-            xmlns="http://javafx.com/javafx/8.0.121" fx:controller="edu.insightr.gildedrose.InventoryController">
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="1019.0" prefWidth="1768.0" xmlns="http://javafx.com/javafx/8.0.121"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.insightr.gildedrose.InventoryController">
 
 
-    <TableView fx:id="itemTable" layoutX="6.0" layoutY="30.0" prefHeight="300.0" prefWidth="420.0">
+    <TableView fx:id="itemTable" layoutX="31.0" layoutY="72.0" prefHeight="300.0" prefWidth="420.0">
         <columns>
             <TableColumn prefWidth="220.0" text="Name">
                 <cellValueFactory>
@@ -35,8 +46,8 @@
             </TableColumn>
         </columns>
     </TableView>
-    <PieChart fx:id="pieChart" layoutX="565.0" layoutY="76.0" prefHeight="293.0" prefWidth="348.0"/>
-    <BarChart fx:id="barChartSellIn" layoutX="855.0" layoutY="389.0" prefHeight="249.0" prefWidth="377.0">
+    <PieChart fx:id="pieChart" layoutX="584.0" layoutY="76.0" prefHeight="293.0" prefWidth="348.0"/>
+    <BarChart fx:id="barChartSellIn" layoutX="1371.0" layoutY="98.0" prefHeight="238.0" prefWidth="367.0">
         <xAxis>
             <CategoryAxis side="BOTTOM"/>
         </xAxis>
@@ -44,7 +55,7 @@
             <NumberAxis side="LEFT"/>
         </yAxis>
     </BarChart>
-    <BarChart fx:id="barChartDate" layoutX="960.0" layoutY="114.0" prefHeight="235.0" prefWidth="206.0">
+    <BarChart fx:id="barChartDate" layoutX="968.0" layoutY="80.0" prefHeight="278.0" prefWidth="367.0">
         <xAxis>
             <CategoryAxis side="BOTTOM"/>
         </xAxis>
@@ -52,23 +63,23 @@
             <NumberAxis side="LEFT"/>
         </yAxis>
     </BarChart>
-    <Button layoutX="455.0" layoutY="113.0" onAction="#onUpdate" text="Update"/>
-    <Button layoutX="450.0" layoutY="164.0" mnemonicParsing="false" onAction="#onLoad" text="Load File"/>
-    <Label layoutX="525.0" layoutY="464.0" text="Nom"/>
-    <Label layoutX="521.0" layoutY="554.0" text="Sell in"/>
-    <Label layoutX="517.0" layoutY="513.0" text="Quality"/>
-    <Label layoutX="486.0" layoutY="599.0" text="Creationdate"/>
-    <Button layoutX="621.0" layoutY="648.0" mnemonicParsing="false" onAction="#onBuy" text="Buy"/>
-    <Button fx:id="buttonSell" disable="true" layoutX="468.0" layoutY="216.0" mnemonicParsing="false" onAction="#onSell"
-            text="Sell">
+    <Button layoutX="473.0" layoutY="175.0" onAction="#onUpdate" prefHeight="25.0" prefWidth="64.0" text="Update"/>
+    <Button layoutX="473.0" layoutY="210.0" mnemonicParsing="false" onAction="#onLoad" text="Load File"/>
+    <Label layoutX="648.0" layoutY="488.0" text="Nom"/>
+    <Label layoutX="644.0" layoutY="578.0" text="Sell in"/>
+    <Label layoutX="640.0" layoutY="537.0" text="Quality"/>
+    <Label layoutX="609.0" layoutY="623.0" text="Creationdate"/>
+    <Button layoutX="744.0" layoutY="672.0" mnemonicParsing="false" onAction="#onBuy" text="Buy"/>
+    <Button fx:id="buttonSell" disable="true" layoutX="473.0" layoutY="243.0" mnemonicParsing="false" onAction="#onSell"
+            prefHeight="25.0" prefWidth="64.0" text="Sell">
         <opaqueInsets>
             <Insets/>
         </opaqueInsets>
     </Button>
-    <DatePicker fx:id="datePickerCreationdate" layoutX="584.0" layoutY="594.0" prefHeight="31.0" prefWidth="200.0"/>
-    <TextField fx:id="textFieldQuality" layoutX="584.0" layoutY="549.0" prefHeight="31.0" prefWidth="200.0"/>
-    <TextField fx:id="textFieldSellIn" layoutX="584.0" layoutY="508.0" prefHeight="31.0" prefWidth="200.0"/>
-    <TableView fx:id="transactionTable" layoutX="14.0" layoutY="349.0" prefHeight="366.0" prefWidth="370.0">
+    <DatePicker fx:id="datePickerCreationdate" layoutX="707.0" layoutY="618.0" prefHeight="31.0" prefWidth="200.0"/>
+    <TextField fx:id="textFieldQuality" layoutX="707.0" layoutY="530.0" prefHeight="31.0" prefWidth="200.0"/>
+    <TextField fx:id="textFieldSellIn" layoutX="707.0" layoutY="571.0" prefHeight="31.0" prefWidth="200.0"/>
+    <TableView fx:id="transactionTable" layoutX="31.0" layoutY="455.0" prefHeight="366.0" prefWidth="420.0">
         <columns>
             <TableColumn prefWidth="220.0" text="Name">
                 <cellValueFactory>
@@ -80,14 +91,14 @@
                     <PropertyValueFactory property="transactiondate"/>
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="50.0" text="Type">
+            <TableColumn prefWidth="49.0" text="Type">
                 <cellValueFactory>
                     <PropertyValueFactory property="transactiontype"/>
                 </cellValueFactory>
             </TableColumn>
         </columns>
     </TableView>
-    <ChoiceBox fx:id="choiceBoxName" layoutX="584.0" layoutY="459.0" prefHeight="31.0" prefWidth="200.0">
+    <ChoiceBox fx:id="choiceBoxName" layoutX="707.0" layoutY="483.0" prefHeight="31.0" prefWidth="200.0">
         <items>
             <FXCollections fx:factory="observableArrayList">
                 <String fx:value="Aged Brie"/>
@@ -99,6 +110,35 @@
             </FXCollections>
         </items>
     </ChoiceBox>
-    <Label fx:id="dateOfTheDay" layoutX="486.0" layoutY="44.0"/>
+    <Label fx:id="ErrorMess" layoutX="675.0" layoutY="448.0" prefHeight="27.0" prefWidth="264.0"
+           text="Fields are not correctly filled " textAlignment="CENTER" textFill="RED" visible="false">
+        <font>
+            <Font name="System Bold" size="18.0"/>
+        </font>
+    </Label>
+    <BarChart fx:id="barChartTransaction" layoutX="1053.0" layoutY="456.0" prefHeight="293.0" prefWidth="672.0">
+        <xAxis>
+            <CategoryAxis side="BOTTOM"/>
+        </xAxis>
+        <yAxis>
+            <NumberAxis side="LEFT"/>
+        </yAxis>
+    </BarChart>
+    <Label layoutX="216.0" layoutY="44.0" text="Inventory" textAlignment="CENTER">
+        <font>
+            <Font size="15.0"/>
+        </font>
+    </Label>
+    <Label layoutX="208.0" layoutY="427.0" text="Transactions">
+        <font>
+            <Font size="15.0"/>
+        </font>
+    </Label>
+    <Label layoutX="884.0" layoutY="14.0" text="Date of the day : " textAlignment="CENTER">
+        <font>
+            <Font size="15.0"/>
+        </font>
+    </Label>
+    <Label fx:id="dateOfTheDay" layoutX="1007.0" layoutY="16.0" prefHeight="21.0" prefWidth="69.0"/>
 
 </AnchorPane>

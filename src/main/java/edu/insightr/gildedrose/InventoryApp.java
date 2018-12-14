@@ -16,7 +16,7 @@ public class InventoryApp extends Application {
         try {
 
             Parent root = FXMLLoader.load(getClass().getResource("/Inventory.fxml"));
-            Scene scene = new Scene(root, 1500, 750);
+            Scene scene = new Scene(root, 1900, 900);
             primaryStage.setScene(scene);
             primaryStage.show();
 

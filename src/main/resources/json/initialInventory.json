@@ -1,10 +1,10 @@
 {
   "inventory": [
-     {
+    {
       "name": "+5 Dexterity Vest",
       "sellIn": 10,
       "quality": 20,
-       "creationdate": "2018-05-10"
+      "creationdate": "2018-05-10"
     },
     {
       "name": "Aged Brie",
