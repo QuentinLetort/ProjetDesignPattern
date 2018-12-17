@@ -68,9 +68,9 @@
     <Button layoutX="758.0" layoutY="219.0" mnemonicParsing="false" onAction="#onLoad" prefHeight="31.0" prefWidth="82.0" text="Load File" />
     <Label fx:id="labelNom" layoutX="255.0" layoutY="550.0" text="Nom" visible="false" />
     <Label fx:id="labelSellIn" layoutX="251.0" layoutY="640.0" text="Sell in" visible="false" />
-    <Label id="labelQuality" fx:id="labelQuality" layoutX="247.0" layoutY="599.0" text="Quality" visible="false" />
-    <Label id="labelCreationDate" layoutX="216.0" layoutY="685.0" text="Creationdate" visible="false" />
-    <Button id="buttonBuy" fx:id="buttonBuy" layoutX="351.0" layoutY="734.0" mnemonicParsing="false" onAction="#onBuy" text="Buy" visible="false" />
+    <Label fx:id="labelQuality" layoutX="247.0" layoutY="599.0" text="Quality" visible="false" />
+    <Label fx:id="labelCreationDate" layoutX="216.0" layoutY="685.0" text="Creationdate" visible="false" />
+    <Button fx:id="buttonBuy" layoutX="351.0" layoutY="734.0" mnemonicParsing="false" onAction="#onBuy" text="Buy" visible="false" />
     <Button fx:id="buttonSell" disable="true" layoutX="758.0" layoutY="260.0" mnemonicParsing="false" onAction="#onSell" prefHeight="31.0" prefWidth="82.0" text="Sell">
         <opaqueInsets>
             <Insets />
